@@ -1,0 +1,17 @@
+{
+  "name": "jatelo-technologies-portfolio",
+  "version": "1.0.0",
+  "description": "Jatelo Technologies Limited — product portfolio site",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "license": "UNLICENSED",
+  "private": true
+}
