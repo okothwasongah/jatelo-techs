@@ -463,6 +463,133 @@
     font-size:12px;
     color:var(--muted);
     font-family:'JetBrains Mono','Courier New',monospace;
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .vacancies-link{
+    background:none;
+    border:1px solid var(--line);
+    color:var(--gold-bright);
+    font-family:'JetBrains Mono','Courier New',monospace;
+    font-size:12px;
+    letter-spacing:1px;
+    padding:9px 16px;
+    border-radius:5px;
+    cursor:pointer;
+    text-decoration:none;
+    transition:border-color .2s ease,background .2s ease;
+  }
+  .vacancies-link:hover{border-color:var(--gold-bright);background:rgba(217,176,110,0.08);}
+  .vacancies-modal-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(6,12,24,0.82);
+    z-index:999;
+    padding:24px;
+    overflow-y:auto;
+    -webkit-backdrop-filter:blur(2px);
+    backdrop-filter:blur(2px);
+  }
+  .vacancies-modal-overlay.open{display:block;}
+  .vacancies-modal{
+    max-width:760px;
+    margin:40px auto;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:0;
+    position:relative;
+  }
+  .vacancies-modal-head{
+    position:sticky;
+    top:0;
+    background:var(--navy);
+    border-bottom:1px solid var(--line);
+    border-radius:10px 10px 0 0;
+    padding:20px 60px 20px 28px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .vacancies-modal-head h2{
+    font-size:clamp(20px,3vw,26px);
+    font-weight:800;
+  }
+  .vacancies-close{
+    position:absolute;
+    top:16px;right:16px;
+    width:36px;height:36px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:transparent;
+    color:var(--white);
+    font-size:18px;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:border-color .2s ease,background .2s ease;
+  }
+  .vacancies-close:hover{border-color:var(--gold-bright);background:rgba(217,176,110,0.1);}
+  .vacancies-modal-body{
+    padding:28px;
+  }
+  .job-post{
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:26px;
+    background:rgba(255,255,255,0.02);
+  }
+  .job-post h3{
+    font-size:clamp(19px,2.4vw,23px);
+    color:var(--gold-bright);
+    margin-bottom:14px;
+    font-weight:800;
+  }
+  .job-meta{
+    font-family:'JetBrains Mono','Courier New',monospace;
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    line-height:2;
+  }
+  .job-post h4{
+    font-size:15px;
+    color:var(--white);
+    margin:22px 0 10px;
+    letter-spacing:0.3px;
+  }
+  .job-post p{
+    color:var(--muted);
+    font-size:14.5px;
+    margin-bottom:6px;
+  }
+  .job-post ul{
+    margin:0 0 4px 20px;
+    color:var(--muted);
+    font-size:14.5px;
+    line-height:1.8;
+  }
+  .job-post ul li{margin-bottom:2px;}
+  .job-apply{
+    margin-top:26px;
+    padding-top:22px;
+    border-top:1px dashed var(--line);
+    font-family:'JetBrains Mono','Courier New',monospace;
+    font-size:13.5px;
+  }
+  .job-apply a{
+    color:var(--gold-bright);
+    text-decoration:underline;
+  }
+  .job-apply-line{margin-bottom:8px;}
+  @media(max-width:640px){
+    .vacancies-modal{margin:16px auto;}
+    .vacancies-modal-head{padding:18px 56px 18px 20px;}
+    .vacancies-modal-body{padding:20px;}
+    .job-post{padding:20px;}
   }
   @media(max-width:640px){
     .stats{gap:32px;}
@@ -921,8 +1048,75 @@
     <a href="tel:+254724090067">+254 724 090 067</a>
     <a href="https://www.jatelo-techs.com" target="_blank" rel="noopener">www.jatelo-techs.com</a>
   </div>
-  <div class="footer-bottom">© 2026 Jatelo Technologies Limited</div>
+  <div class="footer-bottom">
+    <span>© 2026 Jatelo Technologies Limited</span>
+    <button type="button" class="vacancies-link" id="vacanciesOpenBtn">VACANCIES →</button>
+  </div>
 </footer>
+
+<div class="vacancies-modal-overlay" id="vacanciesOverlay">
+  <div class="vacancies-modal" role="dialog" aria-modal="true" aria-labelledby="vacanciesTitle">
+    <button type="button" class="vacancies-close" id="vacanciesCloseBtn" aria-label="Close">✕</button>
+    <div class="vacancies-modal-head">
+      <h2 id="vacanciesTitle">VACANCIES</h2>
+    </div>
+    <div class="vacancies-modal-body">
+      <div class="job-post">
+        <h3>We're Hiring: Sales &amp; Marketing Executive</h3>
+        <div class="job-meta">
+          📍 Location: East Africa (open to candidates across the region)<br>
+          🕐 Type: Full-time<br>
+          💼 Experience: Open to all levels — full training provided
+        </div>
+
+        <h4>About Us</h4>
+        <p>Jatelo Technologies Limited is a fast-growing software company building a diverse portfolio of digital platforms across multiple sectors — from travel and hospitality to automotive diagnostics, real estate, transport, and social platforms. We design, build, and deploy web and mobile solutions that solve real problems for businesses and individuals across East Africa.</p>
+
+        <h4>The Role</h4>
+        <p>We're looking for a driven, personable Sales &amp; Marketing Executive to help us grow our client base and promote our suite of digital products and services. You'll be the face of Jatelo Technologies to prospective clients — identifying opportunities, building relationships, and helping businesses understand how our platforms can support their growth.</p>
+
+        <h4>What You'll Do</h4>
+        <ul>
+          <li>Identify and reach out to potential clients and business partners across East Africa</li>
+          <li>Promote and pitch Jatelo Technologies' products and custom software solutions</li>
+          <li>Build and maintain strong relationships with new and existing clients</li>
+          <li>Represent the company at meetings, events, and on digital/social channels</li>
+          <li>Develop and execute marketing campaigns (social media, digital, and on-the-ground)</li>
+          <li>Track leads, follow up on inquiries, and help convert prospects into clients</li>
+          <li>Gather market feedback to help shape our products and offerings</li>
+          <li>Collaborate with the technical team to align sales pitches with product capabilities</li>
+        </ul>
+
+        <h4>What We're Looking For</h4>
+        <ul>
+          <li>Excellent communication and interpersonal skills</li>
+          <li>A confident, self-motivated go-getter attitude</li>
+          <li>Interest in technology, software, and digital products (prior tech sales experience is a plus, not required)</li>
+          <li>Comfortable using social media and digital tools for outreach and marketing</li>
+          <li>Ability to work independently and manage your own pipeline</li>
+          <li>Fluent in English; knowledge of Swahili or other regional languages is an advantage</li>
+          <li>Any level of experience welcome — we're willing to train the right candidate</li>
+        </ul>
+
+        <h4>What We Offer</h4>
+        <ul>
+          <li>Competitive salary</li>
+          <li>Opportunity to grow with an expanding tech company across multiple sectors</li>
+          <li>Hands-on training and mentorship</li>
+          <li>A dynamic, entrepreneurial work environment</li>
+          <li>Room to grow into a leadership role as the company scales</li>
+        </ul>
+
+        <div class="job-apply">
+          <div class="job-apply-line"><strong>How to Apply:</strong> Send your CV and a short note on why you'd be a great fit, with the subject line "Sales &amp; Marketing Executive Application."</div>
+          <div class="job-apply-line">📧 <a href="mailto:info@jatelo-techs.com?subject=Sales%20%26%20Marketing%20Executive%20Application">info@jatelo-techs.com</a></div>
+          <div class="job-apply-line">📱 Call/WhatsApp: <a href="https://wa.me/254724090067" target="_blank" rel="noopener">+254 724 09 00 67</a></div>
+          <div class="job-apply-line">🌐 <a href="https://www.jatelo-techs.com" target="_blank" rel="noopener">www.jatelo-techs.com</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
   // WhatsApp button — sends a message directly to +254 724 090 067
@@ -935,6 +1129,28 @@
   const subject = encodeURIComponent("Let's build the next route");
   const body = encodeURIComponent("Hi Jatelo Technologies team,\n\nI'd like to get in touch about a project.\n\n");
   document.getElementById("emailBtn").href = `mailto:${emailAddress}?subject=${subject}&body=${body}`;
+
+  // Vacancies modal
+  const vacanciesOverlay = document.getElementById("vacanciesOverlay");
+  const vacanciesOpenBtn = document.getElementById("vacanciesOpenBtn");
+  const vacanciesCloseBtn = document.getElementById("vacanciesCloseBtn");
+
+  function openVacancies(){
+    vacanciesOverlay.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+  function closeVacancies(){
+    vacanciesOverlay.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+  vacanciesOpenBtn.addEventListener("click", openVacancies);
+  vacanciesCloseBtn.addEventListener("click", closeVacancies);
+  vacanciesOverlay.addEventListener("click", (e) => {
+    if (e.target === vacanciesOverlay) closeVacancies();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && vacanciesOverlay.classList.contains("open")) closeVacancies();
+  });
 
   // Mobile nav toggle
   const navToggle = document.getElementById("navToggle");
